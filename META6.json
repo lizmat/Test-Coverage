@@ -1,0 +1,29 @@
+{
+  "auth": "zef:lizmat",
+  "authors": [
+    "Elizabeth Mattijsen"
+  ],
+  "build-depends": [
+  ],
+  "depends": [
+    "Code::Coverage:ver<0.0.2>:auth<zef:lizmat",
+    "paths:ver<10.1>:auth<zef:lizmat>"
+  ],
+  "description": "Check test files for sufficient coverage",
+  "license": "Artistic-2.0",
+  "name": "Test::Coverage",
+  "perl": "6.d",
+  "provides": {
+    "Test::Coverage": "lib/Test/Coverage.rakumod"
+  },
+  "resources": [
+  ],
+  "source-url": "https://github.com/lizmat/Test-Coverage.git",
+  "tags": [
+    "TEST",
+    "COVERAGE"
+  ],
+  "test-depends": [
+  ],
+  "version": "0.0.1"
+}
