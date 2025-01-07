@@ -2,10 +2,13 @@ use Test;
 
 use Test::Coverage;
 
-plan 3;
+plan 6;
 
 ok MY::<&default-coverage-setup>, 'default-coverage-setup imported ok';
+ok MY::<&run>,                    'run imported ok';
+ok MY::<&todo>,                   'todo imported ok';
 ok MY::<&coverage-at-least>,      'coverage-at-least imported ok';
 ok MY::<&uncovered-at-most>,      'uncovered-at-most imported ok';
+ok MY::<&report>,                 'report imported ok';
 
 # vim: expandtab shiftwidth=4
