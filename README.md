@@ -28,6 +28,10 @@ Note that as such, this does **not** add any dependencies to a module, **not** e
 
 By default, all of the test files in the "t" directory, and its subdirectories (extensions `.rakutest` and `.t`) will be run against all of the unique files provided by the `provides` section in the `META6.json` file.
 
+For convenience, all of the features of the `Test` module are also exported by this module.
+
+This distribution is really just a thin wrapper around all of the functionality offered by the [`Code::Coverage`](https://raku.land/zef:lizmat/Code::Coverage) module.
+
 SUBROUTINES
 ===========
 
@@ -53,18 +57,52 @@ default-coverage-setup
 ----------------------
 
 ```raku
-my $*CC = default-coverage-setup;  
+default-coverage-setup;
 
 # run the actual tests and calculate coverage
-$*CC.run;
+run;
 
 coverage-at-least 80;  # ok if at least 80% of lines is covered
 uncovered-at-most 10;  # ok if at most 10 lines are not covered
 ```
 
-The `default-coverage-setup` subroutine sets up the underlying [`Code::Coverage`](https://raku.land/zef:lizmat/Code::Coverage) object, and returns that.
+The `default-coverage-setup` subroutine sets up the underlying [`Code::Coverage`](https://raku.land/zef:lizmat/Code::Coverage) object, sets the `$*CODE-COVERAGE` environment variable with it and returns that.
 
-In most situations this is not needed, as any call to the `coverage-at-least` and `uncovered-at-most` subroutines will trigger the setup and running automatically.
+In most situations this is not needed, as any call to the `coverage-at-least` and `uncovered-at-most` subroutines will trigger the setup and running of the tests automatically.
+
+run
+---
+
+```raku
+my $*CODE-COVERAGE := Code::Coverage.new(...);
+
+run;
+
+# check results
+```
+
+The `run` subroutine runs the tests and updates any information in the `Code::Coverage` object that should be available in the `$*CODE-COVERAGE` environment variable.
+
+It is only needed if some non-standard setup is needed, or if you need to run the tests in a non-standard way:
+
+```raku
+default-coverage-setup;
+
+run("foo");
+run("bar");
+
+# check results
+```
+
+report
+------
+
+```raku
+report                          # show report if test failed
+  unless uncovered-at-most 10;  # ok if at most 10 lines are not covered
+```
+
+The `report` subroutine will print a report of the coverage tests. It is typically only called if a test fails.
 
 AUTHOR
 ======
