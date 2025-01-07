@@ -6,7 +6,7 @@
   "build-depends": [
   ],
   "depends": [
-    "Code::Coverage:ver<0.0.3+>:auth<zef:lizmat",
+    "Code::Coverage:ver<0.0.3+>:auth<zef:lizmat>",
     "paths:ver<10.1+>:auth<zef:lizmat>"
   ],
   "description": "Check test files for sufficient coverage",
