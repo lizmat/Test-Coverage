@@ -1,6 +1,9 @@
+use v6.e.PREVIEW;  # we need IO::Path.stem
+
 use Test;  # for is test-assertion trait
 use Code::Coverage:ver<0.0.3+>:auth<zef:lizmat>;
 use paths:ver<10.1+>:auth<zef:lizmat>;
+use META::constants:ver<0.0.5+>:auth<zef:lizmat> $?DISTRIBUTION;
 
 # Return a valid Code::Coverage object
 my sub CC() {
@@ -46,12 +49,48 @@ my sub uncovered-at-most($boundary) is export is test-assertion {
     ok $missing < $boundary, "Uncovered $missing < $boundary lines";
 }
 
+# Helper role to print if called in sink context
+my role print-if-sunk { method sink() { print "\n" ~ self } }
+
 my sub report() is export {
+    my str @parts = "Coverage Report of "
+      ~ DateTime.now.Str.substr(0,19)
+      ~ ":\n\n";
+
     my $cc := CC;
-    for $cc.coverables -> $coverable {
-        my $key := $coverable.key;
-        say "\n$coverable.value.target():";
-        print $cc.annotated($key);
+    my %coverage := $cc.coverage;
+    my %missed   := $cc.missed;
+    for $cc.coverables {
+        my $key       := .key;
+        my $coverable := .value;
+        my $target    := $coverable.target;
+        @parts.push: "$target (%coverage{$key}):\n";
+
+        my $missed := %missed{$key};
+        @parts.push: "  Missed $missed.elems() lines out of $coverable.line-numbers.elems():\n";
+        @parts.push: $missed.Str.naive-word-wrapper.indent(2) ~ "\n";
+    }
+
+    @parts.push: "\nProduced by " ~ NAME ~ " (" ~ VERSION ~ ")\n";
+
+    @parts.join but print-if-sunk;
+}
+
+my sub source-with-coverage(
+  IO::Path:D $dir = $*PROGRAM.sibling($*PROGRAM.stem)
+) is export {
+    mkdir($dir);
+
+    my $cc := CC;
+    for $cc.coverables {
+        my $target := .value.target;
+
+        # Only report module type targets
+        unless $target.contains('/' | '\\') {
+            my $io := $dir.add($target.subst('::',"/",:g) ~ '.rakucov');
+            mkdir $io.parent;
+            $io.spurt: $cc.annotated(.key);
+        }
     }
 }
 

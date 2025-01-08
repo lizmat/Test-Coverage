@@ -132,8 +132,39 @@ report                          # show report if test failed
 
 =end code
 
-The C<report> subroutine will print a report of the coverage tests.
-It is typically only called if a test fails.
+The C<report> subroutine will print a report of the coverage tests if
+called in sink context.  It is typically only called if a test fails.
+
+If not in sink context, will return the string of the report:
+
+=begin code :lang<raku>
+
+mail report, :to<coverage@reports.org>;
+
+=end code
+
+=head2 source-with-coverage
+
+=begin code :lang<raku>
+
+source-with-coverage;  # produce as sibling dir to script
+
+source-with-coverage($dir);
+
+=end code
+
+The C<source-with-coverage> subroutine will produce the annotated source
+of all targets in the given directory (as an C<IO::Path>) with the
+C<.rakucov> extension.  If called without any argument, will assume a
+directory with the same name (but without extension) as the name of the
+script.
+
+So e.g. a script in C<xt/coverage.rakutest> in a C<Foo::Bar> distribution
+would create a directory C<xt/coverage/Foo> and write the annotated source
+in C<xt/coverage/Foo/Bar.rakucov>.
+
+Note: if you're making use of this feature, it's probably wise to add
+C<*.rakucov> to the C<.gitignore> file.
 
 =head1 AUTHOR
 

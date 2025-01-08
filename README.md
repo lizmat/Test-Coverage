@@ -102,7 +102,26 @@ report                          # show report if test failed
   unless uncovered-at-most 10;  # ok if at most 10 lines are not covered
 ```
 
-The `report` subroutine will print a report of the coverage tests. It is typically only called if a test fails.
+The `report` subroutine will print a report of the coverage tests if called in sink context. It is typically only called if a test fails.
+
+If not in sink context, will return the string of the report:
+
+```raku
+mail report, :to<coverage@reports.org>;
+```
+
+source-with-coverage
+--------------------
+
+```raku
+source-with-coverage;  # produce as sibling dir to script
+
+source-with-coverage($dir);
+```
+
+The `source-with-coverage` subroutine will produce the annotated source of all targets in the given directory (as an `IO::Path`) with the `.rakucov` extension. If called without any argument, will assume a directory with the same name (but without extension) as the name of the script.
+
+So e.g. a script in `xt/coverage.rakutest` in a `Foo::Bar` distribution would create a directory `xt/coverage/Foo` and write the annotated source in `xt/coverage/Foo/Bar.rakucov`.
 
 AUTHOR
 ======

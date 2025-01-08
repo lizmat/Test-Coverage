@@ -1,6 +1,10 @@
 Revision history for Test::Coverage
 
 {{$NEXT}}
+    - Added dependency on META::constants for proper reporting
+    - Moved "report" logic to new "source-with-coverage"
+      subroutine, and created a new "report" sub with more of
+      an overview report
 
 0.0.1  2025-01-07T22:02:16+01:00
     - Initial version

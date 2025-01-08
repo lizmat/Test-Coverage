@@ -2,7 +2,7 @@ use Test;
 
 use Test::Coverage;
 
-plan 6;
+plan 7;
 
 ok MY::<&default-coverage-setup>, 'default-coverage-setup imported ok';
 ok MY::<&run>,                    'run imported ok';
@@ -10,5 +10,6 @@ ok MY::<&todo>,                   'todo imported ok';
 ok MY::<&coverage-at-least>,      'coverage-at-least imported ok';
 ok MY::<&uncovered-at-most>,      'uncovered-at-most imported ok';
 ok MY::<&report>,                 'report imported ok';
+ok MY::<&source-with-coverage>,   'source-with-coverage imported ok';
 
 # vim: expandtab shiftwidth=4
