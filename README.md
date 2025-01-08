@@ -12,6 +12,8 @@ SYNOPSIS
 # in xt/coverage.rakutest
 use Test::Coverage;
 
+plan 2;
+
 coverage-at-least 80;  # ok if at least 80% of lines is covered
 
 uncovered-at-most 10;  # ok if at most 10 lines are not covered
