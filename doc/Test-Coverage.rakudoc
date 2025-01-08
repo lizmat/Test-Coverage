@@ -166,6 +166,12 @@ in C<xt/coverage/Foo/Bar.rakucov>.
 Note: if you're making use of this feature, it's probably wise to add
 C<*.rakucov> to the C<.gitignore> file.
 
+=head1 SEE ALSO
+
+The L<C<App:RaCoCo>|https://raku.land/zef:atroxaper/App::RaCoCo> distribution
+provides similar functionality, but is more app oriented rather than test
+file-based.
+
 =head1 AUTHOR
 
 Elizabeth Mattijsen <liz@raku.rocks>

@@ -125,6 +125,11 @@ So e.g. a script in `xt/coverage.rakutest` in a `Foo::Bar` distribution would cr
 
 Note: if you're making use of this feature, it's probably wise to add `*.rakucov` to the `.gitignore` file.
 
+SEE ALSO
+========
+
+The [`App:RaCoCo`](https://raku.land/zef:atroxaper/App::RaCoCo) distribution provides similar functionality, but is more app oriented rather than test file-based.
+
 AUTHOR
 ======
 

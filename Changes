@@ -1,6 +1,7 @@
 Revision history for Test::Coverage
 
 {{$NEXT}}
+    - Add reference to App::RaCoCo
 
 0.0.3  2025-01-08T18:41:18+01:00
     - Upped dependency on Code::Coverage, because we can
