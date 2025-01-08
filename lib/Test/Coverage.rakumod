@@ -1,7 +1,7 @@
 use v6.*;  # we need IO::Path.stem
 
 use Test;  # for is test-assertion trait
-use Code::Coverage:ver<0.0.3+>:auth<zef:lizmat>;
+use Code::Coverage:ver<0.0.4+>:auth<zef:lizmat>;
 use paths:ver<10.1+>:auth<zef:lizmat>;
 use META::constants:ver<0.0.5+>:auth<zef:lizmat> $?DISTRIBUTION;
 
@@ -41,21 +41,25 @@ my sub coverage-at-least($boundary) is export is test-assertion {
     my $coverables := CC.coverables.values.map(*.line-numbers.elems).sum;
     my $missed     := CC.missed.values.sum;
     my $coverage   := sprintf '%.2f', 100 - 100 * $missed / $coverables;
-    ok $coverage >= $boundary, "Coverage $coverage% > $boundary%";
+    ok $coverage >= $boundary, "Coverage $coverage% >= $boundary%";
 }
 
 my sub uncovered-at-most($boundary) is export is test-assertion {
     my $missing := CC.missed.values.sum;
-    ok $missing <= $boundary, "Uncovered $missing < $boundary lines";
+    ok $missing <= $boundary, "Uncovered $missing <= $boundary lines";
 }
 
 # Helper role to print if called in sink context
 my role print-if-sunk { method sink() { print "\n" ~ self } }
 
 my sub report() is export {
-    my str @parts = "Coverage Report of "
+    my str @parts;
+
+    my $proc := &CORE::run($*EXECUTABLE, "--version", :out);
+    @parts.push: $proc.out.slurp unless $proc.exitcode;
+    @parts.push: "Coverage Report of "
       ~ DateTime.now.Str.substr(0,19).split("T")
-      ~ ":\n\n";
+      ~ "\n";
 
     my $cc := CC;
     my %coverage := $cc.coverage;
@@ -64,7 +68,7 @@ my sub report() is export {
         my $key       := .key;
         my $coverable := .value;
         my $target    := $coverable.target;
-        @parts.push: "$target (%coverage{$key}):\n";
+        @parts.push: "\n$target (%coverage{$key}):\n";
 
         my $missed := %missed{$key};
         @parts.push: "  Missed $missed.elems() lines out of $coverable.line-numbers.elems():\n";

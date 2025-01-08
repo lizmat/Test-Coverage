@@ -2,6 +2,10 @@ Revision history for Test::Coverage
 
 {{$NEXT}}
 
+0.0.3  2025-01-08T18:41:18+01:00
+    - Upped dependency on Code::Coverage, because we can
+    - Tweak report a bit
+
 0.0.2  2025-01-08T13:54:12+01:00
     - Added dependency on META::constants for proper reporting
     - Moved "report" logic to new "source-with-coverage"
