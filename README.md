@@ -123,6 +123,8 @@ The `source-with-coverage` subroutine will produce the annotated source of all t
 
 So e.g. a script in `xt/coverage.rakutest` in a `Foo::Bar` distribution would create a directory `xt/coverage/Foo` and write the annotated source in `xt/coverage/Foo/Bar.rakucov`.
 
+Note: if you're making use of this feature, it's probably wise to add `*.rakucov` to the `.gitignore` file.
+
 AUTHOR
 ======
 

@@ -1,10 +1,14 @@
 Revision history for Test::Coverage
 
 {{$NEXT}}
+
+0.0.2  2025-01-08T13:54:12+01:00
     - Added dependency on META::constants for proper reporting
     - Moved "report" logic to new "source-with-coverage"
       subroutine, and created a new "report" sub with more of
       an overview report
+    - Fix condition checking in "coverage-at-least" and
+      "uncovered-at-most"
 
 0.0.1  2025-01-07T22:02:16+01:00
     - Initial version
