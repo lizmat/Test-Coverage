@@ -68,7 +68,8 @@ my sub report() is export {
         my $key       := .key;
         my $coverable := .value;
         my $target    := $coverable.target;
-        @parts.push: "\n$target (%coverage{$key}):\n";
+        my $coverage  := %coverage{$key} // "100%";
+        @parts.push: "\n$target ($coverage):\n";
 
         my $missed := %missed{$key};
         @parts.push: "  Missed $missed.elems() lines out of $coverable.line-numbers.elems():\n";
