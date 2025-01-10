@@ -72,11 +72,11 @@ The C<uncovered-at-most> subroutine counts as a single test, and
 reports a passed test if the number of lines B<not> covered by
 the tests in the module is less then or equal to the number given.
 
-=head2 must-be-complete;
+=head2 must-be-complete
 
 =begin code :lang<raku>
 
-must-be-complete;
+report unless must-be-complete;
 
 =end code
 
