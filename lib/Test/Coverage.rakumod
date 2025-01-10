@@ -1,7 +1,7 @@
 use v6.*;  # we need IO::Path.stem
 
 use Test;  # for is test-assertion trait
-use Code::Coverage:ver<0.0.4+>:auth<zef:lizmat>;
+use Code::Coverage:ver<0.0.5+>:auth<zef:lizmat>;
 use paths:ver<10.1+>:auth<zef:lizmat>;
 use META::constants:ver<0.0.5+>:auth<zef:lizmat> $?DISTRIBUTION;
 
@@ -27,26 +27,37 @@ my sub default-coverage-setup() is export {
     my $io     := $prefix.add("META6.json");
     my %meta   := Rakudo::Internals::JSON.from-json($io.slurp);
 
+    my $file   := *.ends-with(".rakutest" | ".t");
+    my @runners = paths $prefix.add("t"), :$file;
+
+    my $program := $*PROGRAM.absolute;
+    @runners.append: paths($prefix.add("xt"), :$file).grep(* ne $program);
+
     PROCESS::<$CODE-COVERAGE> := Code::Coverage.new(
-      :targets(%meta<provides>.keys),
-      :runners(paths $prefix.add("t"), :file(*.ends-with(".rakutest" | ".t"))),
-      :extra<-I.>
+      :targets(%meta<provides>.keys), :@runners, :extra<-I.>
     )
 }
 
 # Provide easy run support
 my sub run(|c) is export { CC.run(|c) }
 
+# Test by coverage percentage
 my sub coverage-at-least($boundary) is export is test-assertion {
-    my $coverables := CC.coverables.values.map(*.line-numbers.elems).sum;
-    my $missed     := CC.missed.values.sum;
-    my $coverage   := sprintf '%.2f', 100 - 100 * $missed / $coverables;
+    my $max-lines := CC.max-lines;
+    my $missed    := CC.num-missed-lines;
+    my $coverage  := sprintf '%.2f', 100 - 100 * $missed / $max-lines;
     ok $coverage >= $boundary, "Coverage $coverage% >= $boundary%";
 }
 
+# Test by number of lines not covered
 my sub uncovered-at-most($boundary) is export is test-assertion {
-    my $missing := CC.missed.values.sum;
+    my $missing := CC.num-missed-lines;
     ok $missing <= $boundary, "Uncovered $missing <= $boundary lines";
+}
+
+# Coverage must be 100%
+my sub must-be-complete() is export is test-assertion {
+    nok CC.num-missed-lines, 'is coverage complete?';
 }
 
 # Helper role to print if called in sink context

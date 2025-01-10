@@ -55,6 +55,15 @@ uncovered-at-most 10;  # ok if at most 10 lines are not covered
 
 The `uncovered-at-most` subroutine counts as a single test, and reports a passed test if the number of lines **not** covered by the tests in the module is less then or equal to the number given.
 
+must-be-complete;
+-----------------
+
+```raku
+must-be-complete;
+```
+
+The `must-be-complete` subroutine counts as a single test, and reports a passed test if **all** the coverable lines have been covered. This is usually used for very small modules, and only as a insurance against accidental regressions.
+
 default-coverage-setup
 ----------------------
 

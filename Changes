@@ -1,6 +1,10 @@
 Revision history for Test::Coverage
 
 {{$NEXT}}
+    - Added "must-be-complete" test method
+    - Upped dependency on Code::Coverage, to get support for
+      new .num-xxx-lines methods
+    - Also make sure we use any other xt/test files as runners
     - Add reference to App::RaCoCo
 
 0.0.3  2025-01-08T18:41:18+01:00

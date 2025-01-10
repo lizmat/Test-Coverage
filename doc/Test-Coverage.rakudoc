@@ -72,6 +72,19 @@ The C<uncovered-at-most> subroutine counts as a single test, and
 reports a passed test if the number of lines B<not> covered by
 the tests in the module is less then or equal to the number given.
 
+=head2 must-be-complete;
+
+=begin code :lang<raku>
+
+must-be-complete;
+
+=end code
+
+The C<must-be-complete> subroutine counts as a single test, and
+reports a passed test if B<all> the coverable lines have been
+covered.  This is usually used for very small modules, and only
+as a insurance against accidental regressions.
+
 =head2 default-coverage-setup
 
 =begin code :lang<raku>

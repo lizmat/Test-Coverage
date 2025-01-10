@@ -6,7 +6,7 @@
   "build-depends": [
   ],
   "depends": [
-    "Code::Coverage:ver<0.0.4+>:auth<zef:lizmat>",
+    "Code::Coverage:ver<0.0.5+>:auth<zef:lizmat>",
     "paths:ver<10.1+>:auth<zef:lizmat>",
     "META::constants:ver<0.0.5+>:auth<zef:lizmat>"
   ],
