@@ -59,10 +59,15 @@ must-be-complete
 ----------------
 
 ```raku
-report unless must-be-complete;
+# in xt/coverage.rakutest
+use Test::Coverage;
+
+must-be-complete;
 ```
 
-The `must-be-complete` subroutine counts as a single test, and reports a passed test if **all** the coverable lines have been covered. This is usually used for very small modules, and only as a insurance against accidental regressions.
+The `must-be-complete` subroutine can be called as the **only** subroutine in a coverage test file. It sets the `plan` at `1`, counts as a single test, and passes the test if **all** the coverable lines have been covered. This is usually used for very small modules, and only as a insurance against accidental regressions.
+
+If the test does **not** pass, then the `report` subroutine will be called to give the onlooker an idea of what is going wrong.
 
 default-coverage-setup
 ----------------------

@@ -57,7 +57,11 @@ my sub uncovered-at-most($boundary) is export is test-assertion {
 
 # Coverage must be 100%
 my sub must-be-complete() is export is test-assertion {
-    nok CC.num-missed-lines, 'is coverage complete?';
+    plan 1;
+    unless nok CC.num-missed-lines, 'is coverage complete?' {
+        source-with-coverage;
+        report;
+    }
 }
 
 # Helper role to print if called in sink context

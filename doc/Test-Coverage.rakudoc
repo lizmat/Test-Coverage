@@ -76,14 +76,22 @@ the tests in the module is less then or equal to the number given.
 
 =begin code :lang<raku>
 
-report unless must-be-complete;
+# in xt/coverage.rakutest
+use Test::Coverage;
+
+must-be-complete;
 
 =end code
 
-The C<must-be-complete> subroutine counts as a single test, and
-reports a passed test if B<all> the coverable lines have been
-covered.  This is usually used for very small modules, and only
-as a insurance against accidental regressions.
+The C<must-be-complete> subroutine can be called as the B<only>
+subroutine in a coverage test file.  It sets the C<plan> at C<1>,
+counts as a single test, and passes the test if B<all> the coverable
+lines have been covered.  This is usually used for very small modules,
+and only as a insurance against accidental regressions.
+
+If the test does B<not> pass, then the C<source-with-coverage> and
+C<report> subroutines will be called to give the onlooker an idea of
+what is going wrong.
 
 =head2 default-coverage-setup
 
