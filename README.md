@@ -135,7 +135,7 @@ source-with-coverage;  # produce as sibling dir to script
 source-with-coverage($dir);
 ```
 
-The `source-with-coverage` subroutine will produce the annotated source of all targets in the given directory (as an `IO::Path`) with the `.rakucov` extension. If called without any argument, will assume a directory with the same name (but without extension) as the name of the script.
+The `source-with-coverage` subroutine will produce the annotated source of all targets in the given directory (as an `IO::Path`) with the `.rakucov` extension. If called without any argument, will assume a directory with the same name (but without extension) as the name of the script one directory up from where the test-file resides.
 
 So e.g. a script in `xt/coverage.rakutest` in a `Foo::Bar` distribution would create a directory `xt/coverage/Foo` and write the annotated source in `xt/coverage/Foo/Bar.rakucov`.
 

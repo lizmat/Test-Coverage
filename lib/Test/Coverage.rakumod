@@ -97,7 +97,7 @@ my sub report() is export {
 }
 
 my sub source-with-coverage(
-  IO::Path:D $dir = $*PROGRAM.sibling($*PROGRAM.stem)
+  IO::Path:D $dir = $*PROGRAM.parent(2).add($*PROGRAM.stem)
 ) is export {
     mkdir($dir);
 

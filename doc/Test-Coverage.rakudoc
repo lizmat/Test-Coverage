@@ -180,7 +180,7 @@ The C<source-with-coverage> subroutine will produce the annotated source
 of all targets in the given directory (as an C<IO::Path>) with the
 C<.rakucov> extension.  If called without any argument, will assume a
 directory with the same name (but without extension) as the name of the
-script.
+script one directory up from where the test-file resides.
 
 So e.g. a script in C<xt/coverage.rakutest> in a C<Foo::Bar> distribution
 would create a directory C<xt/coverage/Foo> and write the annotated source
