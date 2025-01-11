@@ -1,6 +1,7 @@
 Revision history for Test::Coverage
 
 {{$NEXT}}
+    - Upped dependency on Code::Coverage to keep in sync
     - Create "coverage" directory as a sibling of "xt" by
       default, rather than as a sibling of the test-file
 

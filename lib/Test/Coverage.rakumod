@@ -1,7 +1,7 @@
 use v6.*;  # we need IO::Path.stem
 
 use Test;  # for is test-assertion trait
-use Code::Coverage:ver<0.0.5+>:auth<zef:lizmat>;
+use Code::Coverage:ver<0.0.6+>:auth<zef:lizmat>;
 use paths:ver<10.1+>:auth<zef:lizmat>;
 use META::constants:ver<0.0.5+>:auth<zef:lizmat> $?DISTRIBUTION;
 
