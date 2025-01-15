@@ -1,6 +1,8 @@
 Revision history for Test::Coverage
 
 {{$NEXT}}
+
+0.0.6  2025-01-15T21:04:23+01:00
     - Up dependency on Code::Coverage to keep in sync
     - Add dependency on ForwardIterables
     - Allow the coverage script to also live inside the
