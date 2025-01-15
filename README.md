@@ -32,8 +32,6 @@ By default, all of the test files in the "t" directory, and its subdirectories (
 
 For convenience, all of the features of the `Test` module are also exported by this module.
 
-This distribution is really just a thin wrapper around all of the functionality offered by the [`Code::Coverage`](https://raku.land/zef:lizmat/Code::Coverage) module.
-
 SUBROUTINES
 ===========
 

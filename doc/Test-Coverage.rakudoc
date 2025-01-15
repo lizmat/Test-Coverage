@@ -41,11 +41,6 @@ section in the C<META6.json> file.
 For convenience, all of the features of the C<Test> module are
 also exported by this module.
 
-This distribution is really just a thin wrapper around all of
-the functionality offered by the
-L<C<Code::Coverage>|https://raku.land/zef:lizmat/Code::Coverage>
-module.
-
 =head1 SUBROUTINES
 
 =head2 coverage-at-least

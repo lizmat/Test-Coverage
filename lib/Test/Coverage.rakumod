@@ -1,9 +1,10 @@
 use v6.*;  # we need IO::Path.stem
 
-use Test;  # for is test-assertion trait
-use Code::Coverage:ver<0.0.6+>:auth<zef:lizmat>;
+use Test;  # for is test-assertion trait and re-export
+use Code::Coverage:ver<0.0.7+>:auth<zef:lizmat>;
 use paths:ver<10.1+>:auth<zef:lizmat>;
 use META::constants:ver<0.0.5+>:auth<zef:lizmat> $?DISTRIBUTION;
+use ForwardIterables:ver<0.0.3+>:auth<zef:lizmat>;
 
 # Return a valid Code::Coverage object
 my sub CC() {
@@ -27,11 +28,12 @@ my sub default-coverage-setup() is export {
     my $io     := $prefix.add("META6.json");
     my %meta   := Rakudo::Internals::JSON.from-json($io.slurp);
 
-    my $file   := *.ends-with(".rakutest" | ".t");
-    my @runners = paths $prefix.add("t"), :$file;
-
     my $program := $*PROGRAM.absolute;
-    @runners.append: paths($prefix.add("xt"), :$file).grep(* ne $program);
+    my $file    := *.ends-with(".rakutest" | ".t");
+    my @runners  = ForwardIterables.new(
+      paths($prefix.add("t"),  :$file),
+      paths($prefix.add("xt"), :$file)
+    ).Seq.grep(* ne $program);
 
     PROCESS::<$CODE-COVERAGE> := Code::Coverage.new(
       :targets(%meta<provides>.keys), :@runners, :extra<-I.>

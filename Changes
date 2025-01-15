@@ -1,26 +1,30 @@
 Revision history for Test::Coverage
 
 {{$NEXT}}
+    - Up dependency on Code::Coverage to keep in sync
+    - Add dependency on ForwardIterables
+    - Allow the coverage script to also live inside the
+      "t" directory
 
 0.0.5  2025-01-11T15:16:56+01:00
-    - Upped dependency on Code::Coverage to keep in sync
+    - Up dependency on Code::Coverage to keep in sync
     - Create "coverage" directory as a sibling of "xt" by
       default, rather than as a sibling of the test-file
 
 0.0.4  2025-01-10T18:19:57+01:00
-    - Added "must-be-complete" test method
-    - Upped dependency on Code::Coverage, to get support for
+    - Add "must-be-complete" test method
+    - Upp dependency on Code::Coverage, to get support for
       new .num-xxx-lines methods
     - Also make sure we use any other xt/test files as runners
     - Add reference to App::RaCoCo
 
 0.0.3  2025-01-08T18:41:18+01:00
-    - Upped dependency on Code::Coverage, because we can
+    - Up dependency on Code::Coverage, because we can
     - Tweak report a bit
 
 0.0.2  2025-01-08T13:54:12+01:00
-    - Added dependency on META::constants for proper reporting
-    - Moved "report" logic to new "source-with-coverage"
+    - Add dependency on META::constants for proper reporting
+    - Move "report" logic to new "source-with-coverage"
       subroutine, and created a new "report" sub with more of
       an overview report
     - Fix condition checking in "coverage-at-least" and

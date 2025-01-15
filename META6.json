@@ -6,9 +6,10 @@
   "build-depends": [
   ],
   "depends": [
-    "Code::Coverage:ver<0.0.6+>:auth<zef:lizmat>",
+    "Code::Coverage:ver<0.0.7+>:auth<zef:lizmat>",
     "paths:ver<10.1+>:auth<zef:lizmat>",
-    "META::constants:ver<0.0.5+>:auth<zef:lizmat>"
+    "META::constants:ver<0.0.5+>:auth<zef:lizmat>",
+    "ForwardIterables:ver<0.0.3+>:auth<zef:lizmat>"
   ],
   "description": "Check test files for sufficient coverage",
   "license": "Artistic-2.0",
