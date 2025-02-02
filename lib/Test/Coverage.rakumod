@@ -1,5 +1,3 @@
-use v6.*;  # we need IO::Path.stem
-
 use Test;  # for is test-assertion trait and re-export
 use Code::Coverage:ver<0.0.7+>:auth<zef:lizmat>;
 use paths:ver<10.1+>:auth<zef:lizmat>;
@@ -98,8 +96,21 @@ my sub report() is export {
     @parts.join but print-if-sunk;
 }
 
+# Transmogrified from 6.e, to avoid needing 6.e here
+my sub stem(IO::Path:D $self, $parts = * --> Str:D) {
+    my str $basename = $self.basename;
+    (my @indices := indices($basename, '.'))
+      ?? $basename.substr(
+           0,
+           $parts ~~ Whatever || $parts > @indices
+            ?? @indices[0]
+            !! @indices[@indices - $parts]
+         )
+      !! $basename
+}
+
 my sub source-with-coverage(
-  IO::Path:D $dir = $*PROGRAM.parent(2).add($*PROGRAM.stem)
+  IO::Path:D $dir = $*PROGRAM.parent(2).add($*PROGRAM.&stem)
 ) is export {
     mkdir($dir);
 

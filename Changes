@@ -2,6 +2,12 @@ Revision history for Test::Coverage
 
 {{$NEXT}}
 
+0.0.7  2025-02-02T13:40:42+01:00
+    - Work around strange issue with Test::Coverage needing
+      6.e.PREVIEW to get IO::Path.stem, and testing e.g. the
+      XML distribution not finding it, and thus failing
+      coverage tests, and thus failing to release
+
 0.0.6  2025-01-15T21:04:23+01:00
     - Up dependency on Code::Coverage to keep in sync
     - Add dependency on ForwardIterables
